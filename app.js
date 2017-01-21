@@ -8,7 +8,6 @@ var socket_io = require("socket.io");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var tweetstream = require('./routes/tweeterstream');
 
 var app = express();
 var io = socket_io();

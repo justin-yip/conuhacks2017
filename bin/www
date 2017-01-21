@@ -42,16 +42,16 @@ server.on('listening', onListening);
 /**
  * Socket.io - Twitter stream integration
  */
-
+// var hashString = "#HelloYP";
 // var tweet = require('../lib/twitter');
 // var client = new twitter(config.twitter);
-// client.stream('statuses/filter', {track: '#HelloYP'}, function(stream) {
+// client.stream('statuses/filter', {track: hashString}, function(stream) {
 //   stream.on('data', function(event) {
 //     //console.log(event);
 //     var tweet_data = {
 //       username: "@" + event.user.screen_name,
 //       tweet_id: event.id_str,
-//       text: event.text,
+//       text: event.text.replace(hashString, "").trim(),
 //       coordinates: event.coordinates.coordinates,
 //       place: event.place.full_name
 //     }

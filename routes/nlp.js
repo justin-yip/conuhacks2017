@@ -1,28 +1,43 @@
 var express = require('express');
 var router = express.Router();
 
-// Natural Language Processing
-let nlp = require('nlp_compromise');
+// The actual language processing happens in this .js file
+var nlp = require('../lib/nlp');
 
-router.get('/', function(req, res, next) {
+// localhost:3000/nlp/
+/*router.get('/', function(req, res, next) {
 	var response = "To use NLP, "
 	+"you could do: "
 	+"localhost:3000/nlp/I want some Nike shoes";
 	res.send(response)
+});*/
+
+router.get('/ui', function(req, res) {
+	res.render('nlpUI', { output: "" });
 });
 
-/* GET routes. */
+// localhost:3000/nlp/ui
+// Returns a html page with an input box, button and an output
+router.post('/ui', function(req, res) {
+	var input = req.body.twitterStatus;
+	var output = nlp.CreateSearchQuery(input);
+
+	//res.render('nlpUI', { output: output });
+	res.render('nlpUI', {
+		input: input,
+		output: output
+	});
+});
+
+// localhost:3000/nlp/:twitterstatus
 router.get('/:twitterstatus', function(req, res, next) {
 	// Retrieve GET parameter
 	var twitterStatus = req.params.twitterstatus;
 
-	// Pass it to NLP compromise for processing
-	var sentence = nlp.sentence(twitterStatus);
-
-	var jsonResult = JSON.stringify(sentence);
+	var searchQuery = nlp.CreateSearchQuery(twitterStatus);
 
 	// Return result for debugging
-	res.send(jsonResult);
+	res.send(searchQuery);
 });
 
 module.exports = router; 

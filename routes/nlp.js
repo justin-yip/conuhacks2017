@@ -25,7 +25,7 @@ router.post('/ui', function(req, res) {
 	//res.render('nlpUI', { output: output });
 	res.render('nlpUI', {
 		input: input,
-		output: output
+		output: JSON.stringify(output)
 	});
 });
 

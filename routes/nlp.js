@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('Natural Language Processor here. I\'m not implemented yet.');
+/* GET routes. */
+router.get('/:twitterstatus', function(req, res, next) {
+	var twitterStatus = req.params.twitterstatus;
+	res.send(twitterStatus);
 });
 
 module.exports = router; 

@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('yphack:server');
 var http = require('http');
+var config = require('../config/config');
+var fs = require('fs');
+var twitter = require('twitter');
 
 /**
  * Get port from environment and store in Express.
@@ -22,12 +25,46 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Socket.io
+ */
+
+var io = app.io;
+io.listen(server);
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Socket.io - Twitter stream integration
+ */
+
+var tweet = require('../lib/twitter');
+var client = new twitter(config.twitter);
+client.stream('statuses/filter', {track: '#HelloYP'}, function(stream) {
+  stream.on('data', function(event) {
+    //console.log(event);
+    var tweet_data = {
+      username: "@" + event.user.screen_name,
+      tweet_id: event.id_str,
+      text: event.text,
+      coordinates: event.coordinates.coordinates,
+      place: event.place.full_name
+    }
+
+
+    tweet.sendTweet(event.id_str, "@" + event.user.screen_name, "Hello my dear sir");
+  });
+
+  stream.on('error', function(error) {
+    console.log("Connection error with Twitter Stream");
+  });
+});
+
 
 /**
  * Normalize a port into a number, string, or false.
@@ -86,5 +123,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

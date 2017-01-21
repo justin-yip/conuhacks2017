@@ -9,6 +9,7 @@ var socket_io = require("socket.io");
 var index = require('./routes/index');
 var users = require('./routes/users');
 var nlp = require('./routes/nlp');
+var yp = require('./routes/yp');
 
 var app = express();
 var io = socket_io();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/nlp', nlp);
+app.use('/yp', yp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

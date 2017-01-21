@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('yphack:server');
 var http = require('http');
+var config = require('../config/config');
+var fs = require('fs');
+var twitter = require('twitter');
 
 /**
  * Get port from environment and store in Express.
@@ -36,25 +39,18 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+/**
+ * Socket.io - Twitter stream integration
+ */
 
-var fs = require('fs');
-var twitter = require('twitter');
-var client = new twitter({
-  consumer_key: 'zd9Iw0gdMkut2Ny7TrUOenoSh',
-  consumer_secret: 'fTsHc3KhsV5UWyEgOV8GYAYcd0tteqINyOlbJVm3nUkdau8AsF',
-  access_token_key: '2394025588-gIDrzfpQUseXK0f6JLpAZ977GiGJroan2gq4dE7',
-  access_token_secret: 'QLD3a9pzVkxz3fNuw6yHmtpzZaJZZpBmsOMiONfRxBAVZ'
-});
-
-//var twee = io.of('tweet');
-
-client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+var client = new twitter(config.twitter);
+client.stream('statuses/filter', {track: '#HelloYP'}, function(stream) {
   stream.on('data', function(event) {
-    console.log(event && event.text);
+    console.log(event);
   });
 
   stream.on('error', function(error) {
-    throw error;
+    console.log("Connection error with Twitter Stream");
   });
 });
 

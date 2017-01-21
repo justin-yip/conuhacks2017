@@ -47,7 +47,7 @@ var tweet = require('../lib/twitter');
 var client = new twitter(config.twitter);
 client.stream('statuses/filter', {track: '#HelloYP'}, function(stream) {
   stream.on('data', function(event) {
-    console.log(event);
+    //console.log(event);
     var tweet_data = {
       username: "@" + event.user.screen_name,
       tweet_id: event.id_str,

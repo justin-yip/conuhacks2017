@@ -100,10 +100,10 @@ function findBusiness(tweetData, dealItems, response){
                 }
                 if(body.listings[i].address.street){
                     item.url = "https://www.google.com/maps?q="+
-                      encodeURIComponent(body.listings[0].address.street.replace(/\s/g, "+")) +","+
-                      encodeURIComponent(body.listings[0].address.city.replace(/\s/g, "+")) +","+
-                      encodeURIComponent(body.listings[0].address.prov.replace(/\s/g, "+")) +","+
-                      encodeURIComponent(body.listings[0].address.pcode.replace(/\s/g, "+"));
+                      encodeURIComponent(body.listings[i].address.street.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[i].address.city.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[i].address.prov.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[i].address.pcode.replace(/\s/g, "+"));
                 }else{
                     item.url = null;
                 }

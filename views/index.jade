@@ -39,7 +39,8 @@ html(lang='en')
             div.border
               if array[i].name!=null
                 p.mainTitle!= array[i].name
-                a(href!=array[i].url)!= array[i].url
+                p.url
+                  a(href!=array[i].url)!= array[i].url
               if array[i].dealName!=null
                 p.mainTitleDeal!= "Deal: " + array[i].dealName
                 p.distance!= "Distance: " + array[i].distance

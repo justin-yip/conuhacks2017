@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Test NLP
+  form(action='/nlp/ui', method='post')
+    div
+      label(for='twitterStatus') Complete input Tweet
+      br
+      textarea(name='twitterStatus', style='width:300px;height:100px;') #{input}
+    .button
+      button(type='submit') Get Search Queries
+  div
+    label(for='SearchQuery') Output search queries:
+    br
+    br
+    textarea(name='SearchQuery', style='width:300px;height:100px;') #{output}

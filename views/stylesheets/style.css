@@ -35,7 +35,7 @@ a {
 
 .results{
   margin-top:5%;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 .mainTitle{
@@ -46,11 +46,11 @@ a {
 }
 
 .mainTitleDeal{
-  font-size:25px;
+  font-size:20px;
   font-weight: bold;
   margin-left:5%;
   padding:10px;
-  color:‎#800000;
+  color:red;
   margin-top:15px;
 }
 

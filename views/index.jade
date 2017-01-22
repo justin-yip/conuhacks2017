@@ -41,8 +41,8 @@ html(lang='en')
                 p.mainTitle!= array[i].name
                 p.url
                   a(href!=array[i].url)!= "Get Directions"
-                if array[i].distance != null
-                  p.distance!= "Distance: " + array[i].distance
+                if array[i].distance != null 
+                  p.distance!= "Distance: " + array[i].distance +" km"
               if array[i].dealName!=null
                 p.mainTitleDeal!= "Deal: " + array[i].dealName
                 p.url

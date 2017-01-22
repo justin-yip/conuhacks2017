@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
     //Default value for lat, long if not provided (from computer)
     req.query.lat = !isNaN(parseFloat(req.query.lat)) ? parseFloat(req.query.lat) : 45.4955956;
     req.query.long = !isNaN(parseFloat(req.query.long)) ? parseFloat(req.query.long) : -73.5793665;
-    console.log("QUERY: " + JSON.stringify(req.query, null, 2));
+    // console.log("QUERY: " + JSON.stringify(req.query, null, 2));
     if(req.query.lat && req.query.long){
         findDeal(req.query, res);
     }else if (req.query.address) {
@@ -37,7 +37,7 @@ function findDeal(tweetData, response){
             response.status(500).send(err);
         }
         var body = JSON.parse(body);
-        console.log("DEALS: " + JSON.stringify(body, null, 2));
+        // console.log("DEALS: " + JSON.stringify(body, null, 2));
         let items = [];
         if(body.data && body.data.length > 0){
             for(i=0;(i<11 && i<body.data.length);i++){
@@ -85,14 +85,14 @@ function findBusiness(tweetData, dealItems, response){
         data.where = "montreal";
     }
      url += encodeQueryData(data)
-     console.log(data);
-     console.log(url);
+    //  console.log(data);
+    //  console.log(url);
      request.get(url, function(err, res, body) {
          if (err) {
              console.log(err)
              response.status(500).send(err);
          }
-         console.log(body);
+        //  console.log(body);
          var body = JSON.parse(body);
          if(body.listings && body.listings.length > 0){
             let items = [];
@@ -122,7 +122,7 @@ function findBusiness(tweetData, dealItems, response){
                 items.push(item);
             }
             items.push.apply(items, dealItems);
-            console.log("ITEMSSS " + JSON.stringify(items, null, 2));
+            // console.log("ITEMSSS " + JSON.stringify(items, null, 2));
             response.render('index', {array: items});
             // response.json(items);
          }else{

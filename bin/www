@@ -49,6 +49,7 @@ var tweet = require('../lib/twitter');
 var client = new twitter(config.twitter);
 client.stream('statuses/filter', {track: hashString}, function(stream) {
   stream.on('data', function(event) {
+    console.log("===================================================");
     var twitterText = event.text.replace(hashString, "").trim();
     console.log(twitterText);
     twitterText = nlp.CreateSearchQuery(twitterText);

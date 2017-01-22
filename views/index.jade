@@ -39,12 +39,12 @@ html(lang='en')
             div.border
               if array[i].name!=null
                 p.mainTitle!= array[i].name
-                a.url!= array[i].url
+                a(href!=array[i].url)!= array[i].url
               if array[i].dealName!=null
                 p.mainTitleDeal!= "Deal: " + array[i].dealName
                 p.distance!= "Distance: " + array[i].distance
                 p.url
-                  a!= array[i].dealUrl
+                  a(href!=array[i].dealUrl)!= array[i].dealUrl
                 
       .col-md-3
     footer.footer 

@@ -39,8 +39,12 @@ function findBusiness(data, response){
         if(body.data && body.data.length > 0){
             let deal = body.data[0].result.Translation.en;
             let merchant = body.data[0].result.Merchants[0].Translation.en;
-            let str = merchant.name +"\nDeal: " + deal.title +"\n"+ merchant.url;
-
+            let str = "\n" + merchant.name +"\nDeal: " + deal.title +"\n";
+            if(deal.url && deal.url!=null){
+                str += deal.url;
+            }else if(merchant.url && merchant.url!=null){
+                str += merchant.url;
+            }
             response.send(str)
         }else{
 

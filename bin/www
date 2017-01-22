@@ -52,7 +52,7 @@ server.on('listening', onListening);
 //     var twitterText = event.text.replace(hashString, "").trim();
 //     twitterText = nlp.CreateSearchQuery(twitterText);
 //     //console.log(event);
-//     console.log("HERE 2");
+//     // console.log("HERE 2");
 //     var tweet_data = {
 //       username: "@" + event.user.screen_name,
 //       tweet_id: event.id_str,
@@ -60,7 +60,7 @@ server.on('listening', onListening);
 //       coordinates: event.coordinates ? event.coordinates.coordinates : null,
 //       place: event.place ? event.place.full_name : null
 //     }
-//     console.log(twitterText);
+//     console.log("Looking for: " + twitterText);
 //
 //     yp.find(tweet_data);
 //     //tweet.sendTweet(event.id_str, "@" + event.user.screen_name, "Hello my dear sir");

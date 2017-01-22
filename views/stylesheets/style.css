@@ -1,0 +1,83 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+#twitter{
+  background-color: #0084b4;
+  opacity:0.8;
+  border-color:#FFF200;
+  border-bottom-width: 5px;
+}
+
+.tweety{
+  color:white;
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.navbar-header{
+  margin-top:5px;
+}
+
+.border{
+  border-bottom: 2px solid grey;
+  box-shadow: 2px 2px 5px #888888;
+  margin-bottom:5%;
+}
+
+.results{
+  margin-top:5%;
+}
+
+.mainTitle{
+  font-size:25px;
+  font-weight: bold;
+  margin-left:5%;
+  padding:10px;
+}
+
+.mainTitleDeal{
+  font-size:25px;
+  font-weight: bold;
+  margin-left:5%;
+  padding:10px;
+  color:‎#800000;
+  margin-top:15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.distance{
+  font-size: 16px;
+  margin-left:9%;
+}
+
+.url{
+  margin-left:9%;
+  margin-bottom:15px;
+  cursor: pointer;
+}

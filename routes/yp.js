@@ -3,7 +3,7 @@ var router = express.Router();
 var request = require('request');
 var twitter = require('../lib/twitter');
 
-router.get('/find', function (req, res, next) {
+router.get('/', function (req, res, next) {
     console.log("Querying Yellow Pages");
 
     if(req.query.lat && req.query.long){
@@ -12,7 +12,7 @@ router.get('/find', function (req, res, next) {
     }else if (req.query.address) {
         findBbusiness(req.query, [], res);
     }else{
-        res.json(null)
+        res.render('index', {array: []});
     }
 });
 
@@ -34,7 +34,6 @@ function findDeal(tweetData, response){
             response.status(500).send(err);
         }
         var body = JSON.parse(body);
-        console.log(body.data[0].result)
         let items = [];
         if(body.data && body.data.length > 0){
             for(i=0;(i<11 && i<body.data.length);i++){
@@ -101,10 +100,10 @@ function findBusiness(tweetData, dealItems, response){
                 }
                 if(body.listings[i].address.street){
                     item.url = "https://www.google.com/maps?q="+
-                        body.listings[i].address.street.replace(" ", "+") +","+ 
-                        body.listings[i].address.city.replace(" ", "+") +","+ 
-                        body.listings[i].address.prov.replace(" ", "+") +","+ 
-                        body.listings[i].address.pcode.replace(" ", "+");
+                      encodeURIComponent(body.listings[0].address.street.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[0].address.city.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[0].address.prov.replace(/\s/g, "+")) +","+
+                      encodeURIComponent(body.listings[0].address.pcode.replace(/\s/g, "+"));
                 }else{
                     item.url = null;
                 }
@@ -118,10 +117,13 @@ function findBusiness(tweetData, dealItems, response){
                 }
                 items.push(item);
             }
-            items.push.apply(items, dealItems)
-            response.json(items);
+            items.push.apply(items, dealItems);
+            console.log("ITEMSSS " + JSON.stringify(items, null, 2));
+            response.render('index', {array: items});
+            // response.json(items);
          }else{
-            response.json(null);
+            // response.json(null);
+            response.render('index', {array: []});
          }
      });
 }

@@ -7,13 +7,13 @@ router.get('/', function (req, res, next) {
     console.log("Querying Yellow Pages");
 
     //Default value for lat, long if not provided (from computer)
-    req.query.lat = !isNaN(parseFloat(req.query.lat)) ? parseFloat(req.query.lat) : 45.4955956;
-    req.query.long = !isNaN(parseFloat(req.query.long)) ? parseFloat(req.query.long) : -73.5793665;
+    req.query.lat = !isNaN(parseFloat(req.query.lat)) ? parseFloat(req.query.lat) : 45.5534868972;
+    req.query.long = !isNaN(parseFloat(req.query.long)) ? parseFloat(req.query.long) : -73.5795593262;
     // console.log("QUERY: " + JSON.stringify(req.query, null, 2));
     if(req.query.lat && req.query.long){
         findDeal(req.query, res);
     }else if (req.query.address) {
-        findBbusiness(req.query, [], res);
+        findBusiness(req.query, [], res);
     }else{
         res.render('index', {array: []});
     }
@@ -94,6 +94,7 @@ function findBusiness(tweetData, dealItems, response){
          }
         //  console.log(body);
          var body = JSON.parse(body);
+         console.log(body);
          if(body.listings && body.listings.length > 0){
             let items = [];
             for(i=0;(i<11 && i<body.listings.length);i++){

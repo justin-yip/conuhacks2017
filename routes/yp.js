@@ -6,8 +6,11 @@ var twitter = require('../lib/twitter');
 router.get('/', function (req, res, next) {
     console.log("Querying Yellow Pages");
 
+    //Default value for lat, long if not provided (from computer)
+    req.query.lat = !isNaN(parseFloat(req.query.lat)) ? parseFloat(req.query.lat) : 45.4955956;
+    req.query.long = !isNaN(parseFloat(req.query.long)) ? parseFloat(req.query.long) : -73.5793665;
+    console.log("QUERY: " + JSON.stringify(req.query, null, 2));
     if(req.query.lat && req.query.long){
-        console.log("coord")
         findDeal(req.query, res);
     }else if (req.query.address) {
         findBbusiness(req.query, [], res);
@@ -34,6 +37,7 @@ function findDeal(tweetData, response){
             response.status(500).send(err);
         }
         var body = JSON.parse(body);
+        console.log("DEALS: " + JSON.stringify(body, null, 2));
         let items = [];
         if(body.data && body.data.length > 0){
             for(i=0;(i<11 && i<body.data.length);i++){
@@ -43,7 +47,7 @@ function findDeal(tweetData, response){
                     id: merchant.id,
                     name: merchant.name,
                     dealName: deal.title,
-                    distance: body.data[i].kilometers+""
+                    distance: isNaN(parseFloat(body.data[i].kilometers)) ? null : parseFloat(body.data[i].kilometers).toFixed(2)
                 }
                 if(deal.url && deal.url!=null){
                     item.dealUrl = deal.url;
@@ -73,7 +77,7 @@ function findBusiness(tweetData, dealItems, response){
         UID: "1",
         apikey: "uvu5duaqz94wexb8sqghqm4q"
     }
-    if (tweetData.coordinates && tweetData.coordinates.length ==2){
+    if (tweetData.lat && tweetData.long){
         data.where = tweetData.lat+","+tweetData.long;
     }else if(tweetData.address){
         data.where = tweetData.address;
@@ -96,7 +100,7 @@ function findBusiness(tweetData, dealItems, response){
                 let item = {
                     id: body.listings[i].id,
                     name: body.listings[i].name,
-                    distance: body.listings[i].distance+""
+                    distance: isNaN(parseFloat(body.listings[i].distance)) ? null : parseFloat(body.listings[i].distance).toFixed(2)
                 }
                 if(body.listings[i].address.street){
                     item.url = "https://www.google.com/maps?q="+

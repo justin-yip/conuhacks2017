@@ -35,7 +35,7 @@ html(lang='en')
       .col-md-3
       .col-md-6
         div.results
-          - array.sort(function(a,b){return a.distance-b.distance});
+          - array.sort(function(a,b){if(a.distance == null) return 1; else if(b.distance == null) return 0; return a.distance-b.distance});
           - for (var i = 0; i< array.length; i++)
             div.border
               if array[i].name!=null

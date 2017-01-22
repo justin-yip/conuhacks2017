@@ -7,5 +7,5 @@ var twitterCredentials = {
 
 module.exports = {
   twitter: twitterCredentials,
-  ngrok: "http://b3a28c78.ngrok.io/"
+  ngrok: "https://ae943abd.ngrok.io/"
 }

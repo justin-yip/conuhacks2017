@@ -44,33 +44,34 @@ server.on('listening', onListening);
 /**
  * Socket.io - Twitter stream integration
  */
-// var hashString = "#HelloYP";
-// var tweet = require('../lib/twitter');
-// var client = new twitter(config.twitter);
-// client.stream('statuses/filter', {track: hashString}, function(stream) {
-//   stream.on('data', function(event) {
-//     var twitterText = event.text.replace(hashString, "").trim();
-//     twitterText = nlp.CreateSearchQuery(twitterText);
-//     //console.log(event);
-//     // console.log("HERE 2");
-//     var tweet_data = {
-//       username: "@" + event.user.screen_name,
-//       tweet_id: event.id_str,
-//       text: twitterText,
-//       coordinates: event.coordinates ? event.coordinates.coordinates : null,
-//       place: event.place ? event.place.full_name : null
-//     }
-//     console.log("Looking for: " + twitterText);
-//
-//     yp.find(tweet_data);
-//     //tweet.sendTweet(event.id_str, "@" + event.user.screen_name, "Hello my dear sir");
-//   });
-//
-//   stream.on('error', function(error) {
-//     console.log(error);
-//     console.log("Connection error with Twitter Stream");
-//   });
-// });
+var hashString = "#HelloYP";
+var tweet = require('../lib/twitter');
+var client = new twitter(config.twitter);
+client.stream('statuses/filter', {track: hashString}, function(stream) {
+  stream.on('data', function(event) {
+    var twitterText = event.text.replace(hashString, "").trim();
+    console.log(twitterText);
+    twitterText = nlp.CreateSearchQuery(twitterText);
+    //console.log(event);
+    // console.log("HERE 2");
+    var tweet_data = {
+      username: "@" + event.user.screen_name,
+      tweet_id: event.id_str,
+      text: twitterText,
+      coordinates: event.coordinates ? event.coordinates.coordinates : null,
+      place: event.place ? event.place.full_name : null
+    }
+    console.log("Looking for: " + twitterText);
+
+    yp.find(tweet_data);
+    //tweet.sendTweet(event.id_str, "@" + event.user.screen_name, "Hello my dear sir");
+  });
+
+  stream.on('error', function(error) {
+    console.log(error);
+    console.log("Connection error with Twitter Stream");
+  });
+});
 
 
 /**

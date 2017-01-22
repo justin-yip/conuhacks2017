@@ -16,6 +16,7 @@
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.7.2",
+    "tinyurl": "^1.1.2",
     "twitter": "^1.7.0",
     "typo-js": "^1.0.3",
     "wordpos": "^1.1.2"

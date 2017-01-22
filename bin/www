@@ -11,6 +11,7 @@ var config = require('../config/config');
 var fs = require('fs');
 var twitter = require('twitter');
 var nlp = require('../lib/nlp');
+var yp = require('../lib/yp');
 
 /**
  * Get port from environment and store in Express.
@@ -51,6 +52,7 @@ server.on('listening', onListening);
 //     var twitterText = event.text.replace(hashString, "").trim();
 //     twitterText = nlp.CreateSearchQuery(twitterText);
 //     //console.log(event);
+//     console.log("HERE 2");
 //     var tweet_data = {
 //       username: "@" + event.user.screen_name,
 //       tweet_id: event.id_str,
@@ -60,7 +62,7 @@ server.on('listening', onListening);
 //     }
 //     console.log(twitterText);
 //
-//
+//     yp.find(tweet_data);
 //     //tweet.sendTweet(event.id_str, "@" + event.user.screen_name, "Hello my dear sir");
 //   });
 //
